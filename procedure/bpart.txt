@@ -1,0 +1,31 @@
+
+ create or replace procedure  f (desig_n varchar) is
+   CURSOR c IS  
+    SELECT * FROM desig where design=desig_n ;
+        d desig.did%TYPE;
+        n desig.name%TYPE;
+        de desig.deptn%TYPE;
+        des desig.design%TYPE;
+      BEGIN
+        OPEN c;
+      DBMS_OUTPUT.PUT_LINE('id ' || 'name ' || 'deptn ' || 'design');
+       LOOP
+         FETCH c INTO d, n, de,des ;
+         EXIT WHEN  c %NOTFOUND;
+         DBMS_OUTPUT.PUT_LINE(d || ' ' || n || ' ' || de || ' ' || des);
+       END LOOP;
+       CLOSE c;
+     END;
+     /
+
+Procedure created.
+
+exec f('prof');
+
+*****************************************************************************************
+OUTPUT
+
+
+id name deptn design
+1 Anu mca prof
+2 Manu mba prof

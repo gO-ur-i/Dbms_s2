@@ -1,0 +1,38 @@
+
+  create or replace procedure gst(a in number,b in number,d in number ) is
+   begin
+    if (a>b) AND ( a>d) then
+     dbms_output.put_line('Greatest is ' ||a ); 
+    elsif (b>a ) AND (b>d) then
+    dbms_output.put_line('Greatest is' ||b );
+    else
+     dbms_output.put_line('Greatest is' ||d );
+    end if;
+   end;
+   /
+
+Procedure created.
+ 
+ declare
+    a number :='&input_number';
+    b number :='&input_number';
+    d number :='&input_number';
+    begin
+    gst(a,b,d);
+    end;
+    /         
+**********************************************************************************************
+OUTPUT
+
+Enter value for input_number: 23
+old   2: a number :='&input_number';
+new   2: a number :='23';
+Enter value for input_number: 45
+old   3: b number :='&input_number';
+new   3: b number :='45';
+Enter value for input_number: 67
+old   4: d number :='&input_number';
+new   4: d number :='67';
+Greatest is67
+
+PL/SQL procedure successfully completed.
