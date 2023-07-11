@@ -1,0 +1,21 @@
+  declare
+   no number:='&input_number';
+    s number:=0;
+     begin
+    for i in 1..no
+    loop
+     s:=s+i;
+     end loop;
+     dbms_output.put_line('sum is '|| s);
+    end;
+    /
+***********************************************************************
+
+OUTPUT
+
+Enter value for input_number: 5
+old   2:  no number:='&input_number';
+new   2:  no number:='5';
+sum is 15
+
+PL/SQL procedure successfully completed.
