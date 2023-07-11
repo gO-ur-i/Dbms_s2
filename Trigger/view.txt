@@ -1,0 +1,25 @@
+create table emp2(
+empid int,
+name varchar(10),
+salary int,
+designation varchar(10),
+constraint eppp primary key(empid));
+
+insert into emp2 values(1,'Anu',100000,'prof');
+insert into emp2  values(2,'Manu',250000,'prof');
+insert into emp2 values(3,'Rinu',250000,'staff');
+
+create or replace view empsalary11 as select salary+salary*10.5/100 as salary,designation from emp2 where designation='prof';
+
+View created.
+
+ select * from empsalary11;
+
+********************************************************************************************************************************************
+
+OUTPUT
+
+    SALARY DESIGNATIO
+---------- ----------
+    110500 prof
+    276250 prof

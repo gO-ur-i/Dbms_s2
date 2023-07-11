@@ -1,0 +1,34 @@
+create or replace trigger trr2
+before insert on studt
+referencing old as o new as n
+for each row
+declare
+m number(6);
+c  number(6);
+begin
+select count(studid) into  c from studt;
+select max(studid) into m from studt;
+if(c<>0)
+then
+:n.studid:=m+1;
+else
+:n.studid:=1;
+end if;
+end;
+/
+
+ insert into studt(name,depart) values('anu','cs');
+
+1 row created.
+
+ select *from studt;
+
+**********************************************************************************************
+OUTPUT
+
+    STUDID NAME       DEPAR
+---------- ---------- -----
+         1 adhi       mca
+         2 sree       mba
+         3 geethu     mba
+         4 anu        cs
