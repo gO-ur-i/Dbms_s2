@@ -1,0 +1,81 @@
+
+-------------------CREATION-------------------------------------
+
+create table student66(id int,sname varchar(10),class varchar(5),dept varchar(10),city varchar(10),constraint cc primary key(id));
+
+------------------INSERTION---------------------------------------
+
+insert into student66 values(1,'lekshmi','cs','mca','trivandrum');
+insert into student66 values(2,'salma','maths','mca','trivandrum');
+insert into student66 values(3,'fousiya','pca','physics','kottayam');
+insert into student66 values(4,'shahana','cs','mca','trivandrum');
+
+-------------------PLSQL/QUERY-----------------------------------------------
+create or replace function find_id(s_id int)
+return number is cid number;
+cursor c2 is select * from student66 where id=s_id;
+id int;
+sname varchar(10);
+class varchar (5);
+dept varchar(10);
+city varchar(10);
+begin 
+open c2;
+dbms_output.put_line('studid'||' '||'same'||' '||'class'||' '||'dept'||' '||'city');
+loop
+fetch c2 into id,sname,class,dept,city;
+exit when c2 %notfound;
+dbms_output.put_line(id||' '||sname||' '||class||' '||dept||'  '||city);
+end loop;
+return cid; 
+close c2;
+end;
+/
+-------------------------------------------------------------------------
+
+a) Accept a studid and display his/her details
+
+select find_id(1)  from dual; 
+
+-------------------------------------------------------------------------
+
+create table deptt(did int primary key,dname varchar(10),st_name varchar(10),st_id int,st_city varchar(10),desgnt varchar(10))
+
+insert into deptt values(1,'mca','rahul',1001,'tvm','professor');
+insert into deptt values(2,'pca','shahin',1002,'tvm','professor');
+insert into deptt values(3,'mca','adityan',1003,'kottayam','clerk');
+insert into deptt values(4,'mca','sreekuttan',1004,'kollam','peon');
+
+---------------------------------------------------------------------------
+
+create or replace function details(id int)
+return number is fid number;
+cursor c3 is select * from deptt where did=id;
+did int;
+dname varchar(10);
+st_name varchar(10);
+st_id int;
+st_city varchar(10);
+desgnt varchar(10);
+begin
+open c3;
+dbms_output.put_line('did  '||'dname  '||'st_name  '||'st_id  
+
+'||'st_city  '||'desgnt');
+loop
+fetch c3 into did,dname,st_name,st_id,st_city,desgnt;
+exit when c3 %notfound;
+dbms_output.put_line(did||'  '||dname||'  '||st_name||'  '||st_id||' 
+
+ '||st_city||'   '||desgnt);
+end loop;
+return fid;
+close c3;
+end;
+/
+---------------------------------------------------------------------------
+b) Accept a deptid and display all staff details belongs to that department
+
+select details(1)  from dual;
+
+---------------------------------------------------------------------------
