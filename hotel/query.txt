@@ -1,0 +1,76 @@
+-----------------------CREATION------------------------------
+
+create table hotel99(hotelid int, name varchar(20),no_of_days 
+int,rate int,constraint ht primary key(hotelid));
+
+create table guest99(gid int, gname varchar(20),no_of_days int , 
+hid int ,constraint gd primary key(gid),constraint hd foreign key
+(hid) references hotel99(hotelid));
+
+----------------------INSERTION-------------------------------
+
+insert into hotel99 values(1,'A',4,500);
+insert into hotel99 values(2,'B',3,1500);
+insert into hotel99 values(3,'C',2,1500);
+insert into hotel99 values(4,'D',1,400);
+
+insert into guest99 values(100,'kuttan',1,1);
+insert into guest99 values(101,'rinu',1,3);
+insert into guest99 values(102,'sheena',1,4);
+insert into guest99 values(103,'neeraja',1,1);
+
+---------------------PL/SQL QUERY-----------------------------------
+
+a)To find the room rent paid by each guest
+
+DECLARE
+  r NUMBER(10);
+  CURSOR c IS
+    SELECT guest99.*, hotel99.rate
+    FROM guest99, hotel99
+    WHERE guest99.hid = hotel99.hotelid;
+  id guest99.gid%TYPE;
+  name guest99.gname%TYPE;
+  days guest99.no_of_days%TYPE;
+  hid guest99.hid%TYPE;
+  rate hotel99.rate%TYPE;
+BEGIN
+  OPEN c;
+  DBMS_OUTPUT.PUT_LINE('id ' || 'name ' || 'hid ' || 'rate');
+  LOOP
+    FETCH c INTO id, name, days, hid, rate;
+    EXIT WHEN c%NOTFOUND;
+    r := 0;
+    r := rate * days;
+    DBMS_OUTPUT.PUT_LINE(id || ' ' || name || ' ' || hid || ' ' || 
+
+rate);
+  END LOOP;
+  CLOSE c;
+END;
+/
+---------------------------------------------------------
+b)Display all hotel details having rate/day > 500
+
+DECLARE
+  CURSOR c IS
+    SELECT *FROM hotel99 WHERE rate > 500;
+  hid hotel99.hotelid%TYPE;
+  name hotel99.name%TYPE;
+  tr hotel99.no_of_days%TYPE;
+  rate hotel99.rate%TYPE;
+BEGIN
+  OPEN c;
+  DBMS_OUTPUT.PUT_LINE('hid ' || 'name ' || 'rooms ' || 'rate');
+  LOOP
+    FETCH c INTO hid, name, tr, rate;
+    EXIT WHEN c%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE(hid || ' ' || name || ' ' || tr || ' ' || 
+
+rate);
+  END LOOP;
+  CLOSE c;
+END;
+/
+
+----------------------------------------
