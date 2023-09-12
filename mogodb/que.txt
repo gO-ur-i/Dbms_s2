@@ -1,0 +1,24 @@
+Q > 
+Create a databse named "College" and then create a collection named "stdlist" insert some values into it 
+
+Query
+
+1.Display name(both fname and lname) and mark of all female students in MCA department
+
+2.Display the details of student who secured heighest mark in the course MCA
+
+3.Display all the male students who secured A+ grade
+
+4.Display the name of the top three students in mechanical department
+
+5.Display the details of female student(fname,lname,grade,mark,contact) who achieved a mark more than 90
+
+6.Display the details of student who secured more than 80 and less than 90
+
+7.Display the details of student whose name starts with "v".
+
+8.Display all student from kollam
+
+9.Display all student who does not belong to neither kollam non Trivandrum
+
+10.Display all female student who belong to either kollam or trivandrum

@@ -1,0 +1,426 @@
+	Creation 
+----------------------------------------------------------------------------------
+
+Mongosh> show dbs
+admin     40.00 KiB
+college   72.00 KiB
+config    72.00 KiB
+demo      72.00 KiB
+local    112.00 KiB
+mca       88.00 KiB
+mongosh    8.00 KiB
+school    72.00 KiB
+                                                                                                                          
+college> use college
+already on db college
+college> db.createCollection("stdlist")
+MongoServerError: Collection college.stdlist already exists.
+college> db.stdlist.insertMany([{fname:"kuttan",lname:"b",mark:95,gender:"male",course:"physics",grade:"A+",dept:"mca",cont:7905725027,add:"vattioor"},{fname:"lechu",lname:"k",mark:10,gender:"female",course:"biology",grade:"s",dept:"mca",cont:6950312343,add:"oolanpara"},{fname:"vimal",lname:"r",mark:85,gender:"male",course:"cs",grade:"A",dept:"pca",cont:7902724590,add:"palayam"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("64ffed1678688d10889cb57c"),
+    '1': ObjectId("64ffed1678688d10889cb57d"),
+    '2': ObjectId("64ffed1678688d10889cb57e")
+  }
+}
+college> db.stdlist.find()
+[
+  {
+    _id: ObjectId("64ffeb7f78688d10889cb578"),
+    fname: 'shibu',
+    lname: 'kumar',
+    mark: 50,
+    gender: 'male',
+    course: 'cs',
+    grade: 's',
+    dept: 'mechanical',
+    cont: 7902725027,
+    add: 'pattom'
+  },
+  {
+    _id: ObjectId("64ffecfa78688d10889cb579"),
+    fname: 'kuttan',
+    lname: 'b',
+    mark: 95,
+    gender: 'male',
+    course: 'physics',
+    grade: 'A+',
+    dept: 'mca',
+    cont: 7905725027,
+    add: 'vattioor'
+  },
+  {
+    _id: ObjectId("64ffecfa78688d10889cb57a"),
+    fname: 'lechu',
+    lname: 'k',
+    mark: 10,
+    gender: 'female',
+    course: 'biology',
+    grade: 's',
+    dept: 'mca',
+    cont: 6950312343,
+    add: 'oolanpara'
+  },
+  {
+    _id: ObjectId("64ffecfa78688d10889cb57b"),
+    fname: 'vimal',
+    lname: 'r',
+    mark: 85,
+    gender: 'male',
+    course: 'cs',
+    grade: 'A',
+    dept: 'pca',
+    cont: 7902724590,
+    add: 'palayam'
+  },
+  {
+    _id: ObjectId("64ffed1678688d10889cb57c"),
+    fname: 'kuttan',
+    lname: 'b',
+    mark: 95,
+    gender: 'male',
+    course: 'physics',
+    grade: 'A+',
+    dept: 'mca',
+    cont: 7905725027,
+    add: 'vattioor'
+  },
+  {
+    _id: ObjectId("64ffed1678688d10889cb57d"),
+    fname: 'lechu',
+    lname: 'k',
+    mark: 10,
+    gender: 'female',
+    course: 'biology',
+    grade: 's',
+    dept: 'mca',
+    cont: 6950312343,
+    add: 'oolanpara'
+  },
+  {
+    _id: ObjectId("64ffed1678688d10889cb57e"),
+    fname: 'vimal',
+    lname: 'r',
+    mark: 85,
+    gender: 'male',
+    course: 'cs',
+    grade: 'A',
+    dept: 'pca',
+    cont: 7902724590,
+    add: 'palayam'
+  }
+]
+-----------------------------------------------------------------
+college> db.stdlist.deleteOne({fname:"lechu"})
+{ acknowledged: true, deletedCount: 1 }
+college> db.stdlist.find()
+[
+  {
+    _id: ObjectId("64ffeb7f78688d10889cb578"),
+    fname: 'shibu',
+    lname: 'kumar',
+    mark: 50,
+    gender: 'male',
+    course: 'cs',
+    grade: 's',
+    dept: 'mechanical',
+    cont: 7902725027,
+    add: 'pattom'
+  },
+  {
+    _id: ObjectId("64ffecfa78688d10889cb579"),
+    fname: 'kuttan',
+    lname: 'b',
+    mark: 95,
+    gender: 'male',
+    course: 'physics',
+    grade: 'A+',
+    dept: 'mca',
+    cont: 7905725027,
+    add: 'vattioor'
+  },
+  {
+    _id: ObjectId("64ffecfa78688d10889cb57b"),
+    fname: 'vimal',
+    lname: 'r',
+    mark: 85,
+    gender: 'male',
+    course: 'cs',
+    grade: 'A',
+    dept: 'pca',
+    cont: 7902724590,
+    add: 'palayam'
+  },
+  {
+    _id: ObjectId("64ffed1678688d10889cb57c"),
+    fname: 'kuttan',
+    lname: 'b',
+    mark: 95,
+    gender: 'male',
+    course: 'physics',
+    grade: 'A+',
+    dept: 'mca',
+    cont: 7905725027,
+    add: 'vattioor'
+  },
+  {
+    _id: ObjectId("64ffed1678688d10889cb57d"),
+    fname: 'lechu',
+    lname: 'k',
+    mark: 10,
+    gender: 'female',
+    course: 'biology',
+    grade: 's',
+    dept: 'mca',
+    cont: 6950312343,
+    add: 'oolanpara'
+  },
+  {
+    _id: ObjectId("64ffed1678688d10889cb57e"),
+    fname: 'vimal',
+    lname: 'r',
+    mark: 85,
+    gender: 'male',
+    course: 'cs',
+    grade: 'A',
+    dept: 'pca',
+    cont: 7902724590,
+    add: 'palayam'
+  }
+]
+----------------------------------------------------------------------------------
+
+1.college> db.stdlist.find({gender:"female"},{fname:true,lname:true,mark:true,_id:0})
+
+[ { fname: 'lechu', lname: 'k', mark: 10 } ]
+
+----------------------------------------------------------------------------------
+
+2.college> db.stdlist.find({dept:"mca"}).sort({mark:-1}).limit(1)
+
+----------------------------------------------------------------------------------
+
+[
+  {
+    _id: ObjectId("64ffecfa78688d10889cb579"),
+    fname: 'kuttan',
+    lname: 'b',
+    mark: 95,
+    gender: 'male',
+    course: 'physics',
+    grade: 'A+',
+    dept: 'mca',
+    cont: 7905725027,
+    add: 'vattioor'
+  }
+]
+----------------------------------------------------------------------------------
+
+3.college> db.stdlist.find({grade:"A+"})
+
+----------------------------------------------------------------------------------
+
+[
+  {
+    _id: ObjectId("64ffecfa78688d10889cb579"),
+    fname: 'kuttan',
+    lname: 'b',
+    mark: 95,
+    gender: 'male',
+    course: 'physics',
+    grade: 'A+',
+    dept: 'mca',
+    cont: 7905725027,
+    add: 'vattioor'
+  },
+  {
+    _id: ObjectId("64ffed1678688d10889cb57c"),
+    fname: 'kuttan',
+    lname: 'b',
+    mark: 95,
+    gender: 'male',
+    course: 'physics',
+    grade: 'A+',
+    dept: 'mca',
+    cont: 7905725027,
+    add: 'vattioor'
+  }
+]
+----------------------------------------------------------------------------------
+
+4.college> db.stdlist.find({dept:"mechanical"}).limit(3)
+
+----------------------------------------------------------------------------------
+
+[
+  {
+    _id: ObjectId("64ffeb7f78688d10889cb578"),
+    fname: 'shibu',
+    lname: 'kumar',
+    mark: 50,
+    gender: 'male',
+    course: 'cs',
+    grade: 's',
+    dept: 'mechanical',
+    cont: 7902725027,
+    add: 'pattom'
+  }
+]
+
+----------------------------------------------------------------------------------
+
+5.db.stdlist.find({mark:{$gt:90}},{fname:1,lname:1,grade:1,mark:1,cont:1})
+
+----------------------------------------------------------------------------------
+
+[
+  {
+    _id: ObjectId("64ffecfa78688d10889cb579"),
+    fname: 'kuttan',
+    lname: 'b',
+    mark: 95,
+    grade: 'A+',
+    cont: 7905725027
+  },
+  {
+    _id: ObjectId("64ffed1678688d10889cb57c"),
+    fname: 'kuttan',
+    lname: 'b',
+    mark: 95,
+    grade: 'A+',
+    cont: 7905725027
+  }
+]
+----------------------------------------------------------------------------------
+
+6. db.stdlist.find({mark:{$gt:80,$lt:90}})
+
+----------------------------------------------------------------------------------
+[
+  {
+    _id: ObjectId("64ffecfa78688d10889cb57b"),
+    fname: 'vimal',
+    lname: 'r',
+    mark: 85,
+    gender: 'male',
+    course: 'cs',
+    grade: 'A',
+    dept: 'pca',
+    cont: 7902724590,
+    add: 'palayam'
+  }
+----------------------------------------------------------------------------------
+
+7.db.stdlist.find({fname:/^v/i})
+
+----------------------------------------------------------------------------------
+[
+  {
+    _id: ObjectId("64ffecfa78688d10889cb57b"),
+    fname: 'vimal',
+    lname: 'r',
+    mark: 85,
+    gender: 'male',
+    course: 'cs',
+    grade: 'A',
+    dept: 'pca',
+    cont: 7902724590,
+    add: 'palayam'
+  }
+----------------------------------------------------------------------------------
+
+8.db.stdlist.find({ add: "kollam" })
+
+----------------------------------------------------------------------------------
+"EMPTY LIST"
+
+----------------------------------------------------------------------------------
+9.db.stdlist.find({add:{$nin:["kollam","trivanrum"]}})
+
+----------------------------------------------------------------------------------
+[
+  {
+    _id: ObjectId("64ffeb7f78688d10889cb578"),
+    fname: 'shibu',
+    lname: 'kumar',
+    mark: 50,
+    gender: 'male',
+    course: 'cs',
+    grade: 's',
+    dept: 'mechanical',
+    cont: 7902725027,
+    add: 'pattom'
+  },
+  {
+    _id: ObjectId("64ffecfa78688d10889cb579"),
+    fname: 'kuttan',
+    lname: 'b',
+    mark: 95,
+    gender: 'male',
+    course: 'physics',
+    grade: 'A+',
+    dept: 'mca',
+    cont: 7905725027,
+    add: 'vattioor'
+  },
+  {
+    _id: ObjectId("64ffecfa78688d10889cb57b"),
+    fname: 'vimal',
+    lname: 'r',
+    mark: 85,
+    gender: 'male',
+    course: 'cs',
+    grade: 'A',
+    dept: 'pca',
+    cont: 7902724590,
+    add: 'palayam'
+  },
+  {
+    _id: ObjectId("64ffed1678688d10889cb57c"),
+    fname: 'kuttan',
+    lname: 'b',
+    mark: 95,
+    gender: 'male',
+    course: 'physics',
+    grade: 'A+',
+    dept: 'mca',
+    cont: 7905725027,
+    add: 'vattioor'
+  },
+  {
+    _id: ObjectId("64ffed1678688d10889cb57d"),
+    fname: 'lechu',
+    lname: 'k',
+    mark: 10,
+    gender: 'female',
+    course: 'biology',
+    grade: 's',
+    dept: 'mca',
+    cont: 6950312343,
+    add: 'oolanpara'
+  },
+  {
+    _id: ObjectId("64ffed1678688d10889cb57e"),
+    fname: 'vimal',
+    lname: 'r',
+    mark: 85,
+    gender: 'male',
+    course: 'cs',
+    grade: 'A',
+    dept: 'pca',
+    cont: 7902724590,
+    add: 'palayam'
+  }
+]
+
+----------------------------------------------------------------------------------
+
+10. db.stdlist.find({add:{$in:["kollam","trivandrum"]}})
+
+"EMPTY LIST"
+
+
+----------------------------------------------------------------------------------
+
+
